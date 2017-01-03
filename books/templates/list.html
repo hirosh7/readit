@@ -10,5 +10,16 @@
 {% else %}
      <p>Welcome, Guest!</p>
 {% endif %}
+<main>
+    <h1>{{ books.count }} books(s)</h1>
+
+    {% for book in books %}
+       <h2>{{ book.title }} by {{ book.list_authors }}</h2>
+       {% if book.is_favorite %}
+          <span class="highlight">favorite</span>
+       {% endif %}
+       {{ book.review }}
+    {% endfor %}
+</main>
 </body>
 </html>
