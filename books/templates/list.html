@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+{% load humanize %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +14,7 @@
      <p>Welcome, Guest!</p>
 {% endif %}
 <main>
-    <h1>{{ books.count }} books(s)</h1>
+    <h1>{{ books.count|apnumber|title }} book{{ books.count|pluralize }}</h1>
 
     {% for book in books %}
        <h2>{{ book.title }} by {{ book.list_authors }}</h2>
