@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import View
 
-from .models import Book
+from .models import Book, Author
 
 
 # Create your views here.
@@ -17,3 +18,17 @@ def list_books(request):
         'books': books,
     }
     return render(request, "list.html", context)
+
+
+class AuthorList(View):
+
+    def get(self, request):
+
+        authors = Author.objects.all()
+
+        context = {
+            'authors': authors,
+        }
+
+        return render(request, "authors.html", context)
+
