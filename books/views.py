@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic import View
 
@@ -22,13 +23,17 @@ def list_books(request):
 
 class AuthorList(View):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
 
-        authors = Author.objects.all()
+        authors = Author.objects.annotate(
+            published_books=Count('books')
+        ).filter(
+            published_books__gt=0
+        )
 
         context = {
             'authors': authors,
         }
 
         return render(request, "authors.html", context)
-
